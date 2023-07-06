@@ -1,16 +1,18 @@
 import argparse
 import configparser
-import os
 import subprocess
+from pathlib import Path
+from shutil import rmtree
 
 
-def clean_dir(dir):
-    # TODO: Parse dir content into a list and apply command to each item separately
-    if dir:
-        l = os.listdir(dir)
-        print(l)
-    else:
-        print('No dir...')
+def clean_dir(target_dir):
+    path = Path(target_dir)
+    for p in path.iterdir():
+        print(f'Removing {p}')
+        if p.is_dir():
+            rmtree(p)
+        else:
+            p.unlink()
 
 
 def clean_conda():
@@ -20,12 +22,12 @@ def clean_conda():
 
 
 def main():
-    project_dir = os.path.dirname(os.path.abspath(__file__))
+    project_dir = Path(__file__).parent
     config = configparser.ConfigParser()
-    config.read(project_dir + '/config.ini')
+    config.read(project_dir / 'config.ini')
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-t', '--target', type=str, required=True, help='Clean target', choices=['conda', 'poetry'])
+    parser.add_argument('-t', '--target', type=str, required=True, help='Cleaner target', choices=['conda', 'poetry'])
     args = parser.parse_args()
 
     match args.target:
