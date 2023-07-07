@@ -9,13 +9,27 @@ from subprocess import Popen, PIPE, STDOUT
 
 
 def clean_dir(target_dir):
-    path = Path(target_dir)
-    for p in path.iterdir():
-        print(f'Removing {p}')
-        if p.is_dir():
-            rmtree(p)
+    iterdir = Path(target_dir).iterdir()
+
+    if any(iterdir):
+        print(f'{target_dir}:')
+        for i in iterdir:
+            print(i.name)
+
+        inpt = input('Do you want to clean this folder? Y/N: ')
+
+        if inpt == 'Y':
+            for i in iterdir:
+                print(f'Removing {i}')
+                if i.is_dir():
+                    rmtree(i)
+                else:
+                    i.unlink()
         else:
-            p.unlink()
+            print('Skipping...')
+            return 0
+    else:
+        print(f'"{target_dir}" is empty...')
 
 
 def clean_conda(conda_bin):
