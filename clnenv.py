@@ -18,7 +18,7 @@ def clean_dir(target_dir):
 
         inpt = input('Do you want to clean this folder? Y/N: ')
 
-        if inpt == 'Y':
+        if inpt in ['y', 'Y']:
             for i in iterdir:
                 print(f'Removing {i}')
                 if i.is_dir():
@@ -42,10 +42,15 @@ def clean_conda(conda_bin):
 
 
 def main():
-    # The script meant to run from a symlink, thus readlink() is used.
-    project_dir = Path(__file__).readlink().parent
+    f = Path(__file__)
+
+    if f.is_symlink():
+        project_root = f.readlink().parent
+    else:
+        project_root = f.parent
+
     config = configparser.ConfigParser()
-    config.read(project_dir / 'config.ini')
+    config.read(project_root / 'config.ini')
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-t', '--target', type=str, required=True, help='Cleaner target',
