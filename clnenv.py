@@ -35,7 +35,7 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-t', '--target', type=str, required=True, help='Cleaner target',
-                        choices=['conda', 'poetry', 'pipenv'])
+                        choices=['conda', 'poetry', 'pipenv', 'all'])
     args = parser.parse_args()
 
     match args.target:
@@ -44,6 +44,10 @@ def main():
         case 'poetry':
             clean_dir(config['env']['poetry'])
         case 'pipenv':
+            clean_dir(config['env']['pipenv'])
+        case 'all':
+            clean_conda(config['bin']['conda'])
+            clean_dir(config['env']['poetry'])
             clean_dir(config['env']['pipenv'])
 
 
