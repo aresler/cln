@@ -10,7 +10,6 @@ from subprocess import Popen, PIPE, STDOUT
 
 def clean_dir(target_dir):
     iterdir = Path(target_dir).iterdir()
-
     if any(iterdir):
         print(f'{target_dir}:')
         for i in iterdir:
@@ -19,7 +18,7 @@ def clean_dir(target_dir):
         inpt = input('Do you want to clean this folder? Y/N: ')
 
         if inpt in ['y', 'Y']:
-            for i in iterdir:
+            for i in Path(target_dir).iterdir():
                 print(f'Removing {i}')
                 if i.is_dir():
                     rmtree(i)
