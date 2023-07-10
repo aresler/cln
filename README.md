@@ -1,8 +1,13 @@
-A small script to cleanup python virtual environments.
+A small script to cleanup python virtual environments
 
-usage: cln.py [-h] -t {conda,poetry,pipenv}
+```
+usage: cln [-h] [-H] {env} ...
 
 options:
--   -h, --help            show this help message and exit
--   -t {conda,poetry,pipenv}, --target {conda,poetry,pipenv}
-                        Cleaner target
+  -h, --help    show this help message and exit
+  -H, --hidden  Include hidden
+
+env:
+  {env}
+    env         Clear Python virtual environment
+```
