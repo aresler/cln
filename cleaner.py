@@ -48,18 +48,19 @@ class DirCleaner:
         self.prompt = prompt
 
     def clean(self):
+        print(f'{self.target}...')
         if not self.is_empty():
             go = self._ask() if self.prompt else True
             if go:
-                print(f'Clearing {self.target}...')
                 for i in self.target.iterdir():
                     if (self.filt.ext_list and i.suffix in self.filt.ext_list) or (
                             not self.filt.ext_list and not (i.name.startswith('.') and not self.filt.hidden)):
                         remove_object(i)
+                print()
             else:
                 print('Skipping...')
         else:
-            print('The directory is empty...')
+            print('The directory is empty...\n')
 
     def is_empty(self):
         if any(self.target.iterdir()):
@@ -68,11 +69,10 @@ class DirCleaner:
             return True
 
     def _ask(self):
-        print(f'{self.target}:\n')
         for i in self.target.iterdir():
             print(i.name)
 
-        p = input('Clear? Y/N: ')
+        p = input('\nClear? Y/N: ')
         if p.lower() == 'y':
             return True
         else:
