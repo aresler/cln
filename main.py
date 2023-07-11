@@ -7,7 +7,7 @@ from cleaner import DirCleaner, Filter, clean_conda
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='When run without arguments, clears configured directories')
     parser.add_argument('-H', '--hidden', action='store_true', help='Include hidden')
 
     sub = parser.add_subparsers(title='env')
@@ -25,19 +25,19 @@ def main():
                 c = DirCleaner(POETRY, Filter(), prompt=True)
                 c.clean()
             case 'pipenv':
-                c = DirCleaner(PIPENV, Filter())
+                c = DirCleaner(PIPENV, Filter(), prompt=True)
                 c.clean()
             case 'all':
                 clean_conda(CONDA)
-                c = DirCleaner(POETRY, Filter())
+                c = DirCleaner(POETRY, Filter(), prompt=False)
                 c.clean()
-                c1 = DirCleaner(PIPENV, Filter())
+                c1 = DirCleaner(PIPENV, Filter(), prompt=False)
                 c1.clean()
     else:
         for d in DIRS:
-            p = d[0]
+            path = d[0]
             filt = Filter(d[1], hidden=args.hidden)
-            c = DirCleaner(p, filt)
+            c = DirCleaner(path, filt)
             c.clean()
     print('Done!')
 
