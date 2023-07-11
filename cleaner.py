@@ -12,7 +12,7 @@ class Filter:
 
 
 def remove_object(target: Path):
-    print(f'Removing {target}...')
+    print(target.name)
     if target.is_file():
         target.unlink()
     else:

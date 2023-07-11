@@ -3,11 +3,11 @@ from pathlib import Path
 home = Path.home()
 
 # bin
-CONDA = Path('/Users/john/miniconda3/bin/conda')
+CONDA = home / 'miniconda3/bin/conda'
 
 # env
-POETRY = Path('/Users/john/Library/Caches/pypoetry')
-PIPENV = Path('/Users/john/.local/share/virtualenvs')
+POETRY = home / 'Library/Caches/pypoetry'
+PIPENV = home / '.local/share/virtualenvs'
 
 # A list of custom dirs to clear
 
