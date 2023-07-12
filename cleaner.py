@@ -63,7 +63,8 @@ class DirCleaner:
             print('The directory is empty...\n')
 
     def is_empty(self):
-        if any(self.target.iterdir()):
+        if (self.filt.hidden and any(self.target.iterdir())) or (not self.filt.hidden and any(
+                i for i in self.target.iterdir() if not i.name.startswith('.'))):
             return False
         else:
             return True
