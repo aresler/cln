@@ -49,7 +49,7 @@ class DirCleaner:
 
     def clean(self):
         print(f'{self.target}...')
-        if not self.is_empty():
+        if not self.is_empty:
             go = self._ask() if self.prompt else True
             if go:
                 for i in self.target.iterdir():
@@ -62,6 +62,7 @@ class DirCleaner:
         else:
             print('The directory is empty...\n')
 
+    @property
     def is_empty(self):
         if (self.filt.hidden and any(self.target.iterdir())) or (not self.filt.hidden and any(
                 i for i in self.target.iterdir() if not i.name.startswith('.'))):
