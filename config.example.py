@@ -2,17 +2,16 @@ from pathlib import Path
 
 home = Path.home()
 
-# bin
+# Bin
 CONDA = home / 'miniconda3/bin/conda'
 
-# env
+# Env/Cache
 POETRY = home / 'Library/Caches/pypoetry'
 PIPENV = home / '.local/share/virtualenvs'
 
-# A list of custom dirs to clear
-
-DIRS = [
-    ((home / 'dir'), None),
-    ((home / 'dir2'), None),
-    ((home / 'dir3'), ['.png', '.jpg', '.jpeg', '.mp4', '.mov']),
+# Custom dirs
+DIRS: list[(Path, list[str])] = [
+    (home / 'dir', None),
+    (home / 'dir2', None),
+    (home / 'dir3', ['.png', '.jpg', '.jpeg', '.mp4', '.mov']),
 ]
