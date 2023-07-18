@@ -8,6 +8,7 @@ CONDA = home / 'miniconda3/bin/conda'
 # Env/Cache
 POETRY = home / 'Library/Caches/pypoetry'
 PIPENV = home / '.local/share/virtualenvs'
+CARGO = home / '.cargo/registry'
 
 # Custom dirs
 DIRS: list[(Path, list[str])] = [

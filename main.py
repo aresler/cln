@@ -13,7 +13,7 @@ def main():
     sub = parser.add_subparsers(title='env')
     sub1 = sub.add_parser('env', help='Clear Python virtual environment')
     sub1.add_argument('-t', '--target', type=str, required=True, help='Cleaner target',
-                      choices=['conda', 'poetry', 'pipenv', 'all'])
+                      choices=['conda', 'poetry', 'pipenv', 'cargo', 'all'])
 
     args = parser.parse_args()
 
@@ -27,12 +27,14 @@ def main():
             case 'pipenv':
                 c = DirCleaner(PIPENV, Filter(), prompt=True)
                 c.clean()
+            case 'cargo':
+                c = DirCleaner(CARGO, Filter(), prompt=True)
+                c.clean()
             case 'all':
                 clean_conda(CONDA)
-                c = DirCleaner(POETRY, Filter(), prompt=False)
-                c.clean()
-                c1 = DirCleaner(PIPENV, Filter(), prompt=False)
-                c1.clean()
+                for env in POETRY, PIPENV, CARGO:
+                    c = DirCleaner(env, Filter(), prompt=False)
+                    c.clean()
     else:
         for d in DIRS:
             path = d[0]
