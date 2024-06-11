@@ -12,8 +12,14 @@ def main():
 
     sub = parser.add_subparsers(title='env')
     sub1 = sub.add_parser('env', help='Clear Python virtual environment')
-    sub1.add_argument('-t', '--target', type=str, required=True, help='Cleaner target',
-                      choices=['conda', 'poetry', 'pipenv', 'cargo', 'all'])
+    sub1.add_argument(
+        '-t',
+        '--target',
+        type=str,
+        required=True,
+        help='Cleaner target',
+        choices=['conda', 'poetry', 'pipenv', 'cargo', 'all'],
+    )
 
     args = parser.parse_args()
 

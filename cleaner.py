@@ -54,7 +54,8 @@ class DirCleaner:
             if go:
                 for i in self.target.iterdir():
                     if (self.filt.ext_list and i.suffix in self.filt.ext_list) or (
-                            not self.filt.ext_list and not (i.name.startswith('.') and not self.filt.hidden)):
+                        not self.filt.ext_list and not (i.name.startswith('.') and not self.filt.hidden)
+                    ):
                         remove_object(i)
                 print()
             else:
@@ -64,8 +65,9 @@ class DirCleaner:
 
     @property
     def is_empty(self):
-        if (self.filt.hidden and any(self.target.iterdir())) or (not self.filt.hidden and any(
-                i for i in self.target.iterdir() if not i.name.startswith('.'))):
+        if (self.filt.hidden and any(self.target.iterdir())) or (
+            not self.filt.hidden and any(i for i in self.target.iterdir() if not i.name.startswith('.'))
+        ):
             return False
         else:
             return True
